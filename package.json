@@ -7,6 +7,8 @@
   "scripts": {
     "test": "jest src",
     "cov": "jest src --coverage",
+    "cov:clean": "rimraf coverage",
+    "cov:publish": "cat coverage/lcov.info | codacy-coverage --verbose",
     "lint": "echo '*** Verify code quality (lint):' && eslint src"
   },
   "repository": {
@@ -60,6 +62,7 @@
     "@react-navigation/core": "^3.5.1",
     "babel-jest": "^24.9.0",
     "babel-plugin-transform-default-import": "^1.0.0",
+    "codacy-coverage": "^3.4.0",
     "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.17.0",
     "feature-u": "^2.1.1",
