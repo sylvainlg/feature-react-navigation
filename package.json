@@ -1,0 +1,67 @@
+{
+  "name": "feature-react-navigation",
+  "title": "Feature React Navigation",
+  "version": "0.1.0",
+  "description": "Feature based navigation using react-navigation",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sylvainlg/feature-reat-navigation.git",
+    "baseUrl": "https://github.com/sylvainlg/feature-reat-navigation"
+  },
+  "keywords": [
+    "react",
+    "react-native",
+    "react-web",
+    "feature-u",
+    "feature",
+    "features",
+    "react",
+    "router",
+    "routing",
+    "navigation",
+    "navigator",
+    "utility",
+    "util",
+    "utils",
+    "helper",
+    "helpers",
+    "js",
+    "javascript"
+  ],
+  "author": {
+    "name": "Sylvain LE GLEAU",
+    "email": "syl@sylvainlg.fr"
+  },
+  "license": "MIT",
+  "licenseFilename": "LICENSE",
+  "readmeFilename": "README.md",
+  "peerDependencies": {
+    "@react-navigation/core": ">=4.0.0",
+    "feature-u": ">=1.0.0",
+    "react": ">=16.9.0"
+  },
+  "dependencies": {
+    "lodash.has": "^4.5.2",
+    "react-is": "^16.12.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.7.4",
+    "@babel/runtime": "^7.7.7",
+    "@react-navigation/core": "^3.5.1",
+    "babel-jest": "^24.9.0",
+    "babel-plugin-transform-default-import": "^1.0.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-react": "^7.17.0",
+    "feature-u": "^2.1.1",
+    "jest": "^24.9.0",
+    "react": "^16.9.0"
+  }
+}
