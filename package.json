@@ -3,9 +3,10 @@
   "title": "Feature React Navigation",
   "version": "0.1.0",
   "description": "Feature based navigation using react-navigation",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "echo '*** Verify code quality (lint):' && eslint src"
   },
   "repository": {
     "type": "git",

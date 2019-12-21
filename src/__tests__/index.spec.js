@@ -1,8 +1,6 @@
-import { createRouteAspect, buildRoutes, logf } from '../index';
+import { createRouteAspect, buildRoutes } from '../index';
 import React from 'react';
 import { createSwitchNavigator } from '@react-navigation/core';
-
-// logf.enable();
 
 function createAppContainer() {
   return class AppContainer extends React.Component {};
