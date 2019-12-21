@@ -5,7 +5,7 @@
   "description": "Feature based navigation using react-navigation",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest src",
     "cov": "jest src --coverage",
     "lint": "echo '*** Verify code quality (lint):' && eslint src"
   },
