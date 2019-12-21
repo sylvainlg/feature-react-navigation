@@ -6,6 +6,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "jest",
+    "cov": "jest src --coverage",
     "lint": "echo '*** Verify code quality (lint):' && eslint src"
   },
   "repository": {
