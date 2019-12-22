@@ -1,6 +1,5 @@
 language: node_js
 node_js:
-  - '6' # NOTE: even numbers only (odds are node development)
   - '8'
   - '10'
   - node # current node version (may be duplicate, but that's OK)
