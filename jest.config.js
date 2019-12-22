@@ -3,4 +3,5 @@ module.exports = {
   transformIgnorePatterns: [
     '<rootDir>/node_modules/(?!react-navigation|@react-navigation)',
   ],
+  collectCoverageFrom: ['src/**/*.js', '!**/spec/**'],
 };

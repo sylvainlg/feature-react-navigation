@@ -1,2 +1,9 @@
 node_modules
 coverage
+
+# bundled distribution (generated via "npm run build")
+dist/
+lib/
+es/
+
+*error.log
