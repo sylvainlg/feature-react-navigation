@@ -4,7 +4,7 @@
 
 The module aim to build a single navigation tree with routes provided by each feature registred in your feature-u instance. Your features don't have the knowledge off the final tree, they only have to expose their routes throught the `route` aspect.
 
-[![Build Status](https://travis-ci.com/sylvainlg/feature-react-navigation.svg?branch=master)](https://travis-ci.com/sylvainlg/feature-react-navigation)
+[![Build Status](https://travis-ci.org/sylvainlg/feature-react-navigation.svg?branch=master)](https://travis-ci.com/sylvainlg/feature-react-navigation)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/508c8d7d913a4c3ca61b7428dea59bdb)](https://www.codacy.com/manual/sylvainlg/feature-react-navigation?utm_source=github.com&utm_medium=referral&utm_content=sylvainlg/feature-react-navigation&utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/508c8d7d913a4c3ca61b7428dea59bdb)](https://www.codacy.com/manual/sylvainlg/feature-react-navigation?utm_source=github.com&utm_medium=referral&utm_content=sylvainlg/feature-react-navigation&utm_campaign=Badge_Coverage)
 [![NPM Version Badge](https://img.shields.io/npm/v/feature-react-navigation.svg)](https://www.npmjs.com/package/feature-react-navigation)
