@@ -73,16 +73,6 @@ describe('genesis', () => {
     expect(aspect.genesis()).not.toBeNull();
   });
 
-  it('should fail with wrong createAppFunction$ configuration (not a correctly named function)', () => {
-    // Fail => return string; success => return null
-    const aspect = createRouteAspect();
-    aspect.config.navigationPattern$ = {};
-    function abc() {}
-    aspect.config.createAppFunction$ = abc;
-
-    expect(aspect.genesis()).not.toBeNull();
-  });
-
   it('should success with configuration', () => {
     // Fail => return string; success => return null
     const aspect = createRouteAspect();

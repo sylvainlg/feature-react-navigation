@@ -40,11 +40,9 @@ function genesis() {
     return `the ${this.name} aspect requires config.navigationPattern$ to be configured (at run-time)!`;
   }
 
-  const allowedFunctionNames = ['createAppContainer', 'createBrowserApp'];
   if (
     !this.config.createAppFunction$ ||
-    typeof this.config.createAppFunction$ !== 'function' ||
-    !allowedFunctionNames.includes(this.config.createAppFunction$.name)
+    typeof this.config.createAppFunction$ !== 'function'
   ) {
     return `the ${this.name} aspect requires config.createAppFunction$ to be configured (at run-time)!
     
