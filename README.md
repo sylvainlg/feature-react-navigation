@@ -35,8 +35,8 @@ Within your mainline, register the feature-react-navigation `routeAspect` to fea
 - `config.navigationPattern$`
 
 ```js
-import {launchApp}            from 'feature-u';
-import { routeAspect } 				from 'feature-react-navigation'; // **1**
+import { launchApp }          from 'feature-u';
+import { createRouteAspect }  from 'feature-react-navigation'; // **1**
 import { createAppContainer } from '@react-navigation/native';
 import features               from './feature';
 
