@@ -1,5 +1,11 @@
 # feature-react-navigation - _Feature based navigation using react-navigation_
 
+
+---------
+**The v0.1.1 is only compatible with react-navigation 3.x.x**
+
+---------
+
 **feature-react-navigation** is a [feature-u](https://feature-u.js.org/) module which provide a routing aspect into your features using [react-navigation](https://reactnavigation.org/).
 
 The module aim to build a single navigation tree with routes provided by each feature registred in your feature-u instance. Your features don't have the knowledge off the final tree, they only have to expose their routes throught the `route` aspect.
