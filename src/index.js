@@ -9,12 +9,28 @@ export const logf = launchApp.diag.logf.newLogger(
   '- ***feature-react-navigation*** routeAspect: '
 );
 
-export function createRouteAspect(name = 'route') {
+export function createRouteAspect(config = {}) {
   // validate parameters
   const check = verify.prefix('createRouteAspect() parameter violation: ');
 
+  check(
+    typeof config === 'object',
+    `
+    config parameter must be an object
+
+    Allowed parameters are : 
+    - name type string
+    - createAppFunction type function
+    - navigationPattern type object
+  `
+  );
+
+  const { name = 'route', createAppFunction, navigationPattern } = config;
+
   check(name, 'name is required');
   check(typeof name === 'string', 'name must be a string');
+
+  // Other fields are tested in genesis function
 
   return createAspect({
     name,
@@ -23,9 +39,10 @@ export function createRouteAspect(name = 'route') {
     assembleFeatureContent,
     initialRootAppElm,
     config: {
-      // PUBLIC: createAppFunction must contain createAppContainer (react-native) or createBrowserApp (react web) function (REQUIRED CONFIGURATION)
-      createAppFunction$: null,
-      navigationPattern$: null, // PUBLIC: navigationPattern describe how to build navigator's tree (REQUIRED CONFIGURATION)
+      // createAppFunction must contain createAppContainer (react-native) or createBrowserApp (react web) function (REQUIRED CONFIGURATION)
+      createAppFunction$: createAppFunction,
+      // PUBLIC: navigationPattern describe how to build navigator's tree (REQUIRED CONFIGURATION)
+      navigationPattern$: navigationPattern,
     },
   });
 }
@@ -37,7 +54,7 @@ function genesis() {
   logf('genesis() validating required config.navigationPattern$');
 
   if (!this.config.navigationPattern$) {
-    return `the ${this.name} aspect requires config.navigationPattern$ to be configured (at run-time)!`;
+    return `the ${this.name} aspect requires navigationPattern to be configured in createRouteAspect object parameter !`;
   }
 
   if (
@@ -241,7 +258,7 @@ export function buildRoutes(allroutes, fassets, config) {
   if (typeof config.routes !== 'object') {
     throw new Error(
       'feature-react-navigation::buildRoutes : no routes detected, please check your' +
-        ' navigationPattern$ configuration and exposed routes from features, actual config value : ' +
+        ' navigationPattern config property and exposed routes from features, actual config value : ' +
         JSON.stringify(config)
     );
   }

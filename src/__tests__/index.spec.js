@@ -32,8 +32,12 @@ describe('createRouteAspect', () => {
     expect(aspect.name).toBe('route');
   });
 
+  it('config should be an object', () => {
+    expect(() => createRouteAspect('custom')).toThrow();
+  });
+
   it('name should be custom', () => {
-    const aspect = createRouteAspect('custom');
+    const aspect = createRouteAspect({ name: 'custom' });
     expect(aspect.name).toBe('custom');
   });
 
@@ -47,37 +51,38 @@ describe('createRouteAspect', () => {
 });
 
 describe('genesis', () => {
-  it('should fail without navigationPattern$ configuration', () => {
+  it('should fail without navigationPattern config property', () => {
     // Fail => return string; success => return null
     const aspect = createRouteAspect();
 
     expect(aspect.genesis()).toBe(
-      'the route aspect requires config.navigationPattern$ to be configured (at run-time)!'
+      'the route aspect requires navigationPattern to be configured in createRouteAspect object parameter !'
     );
   });
 
-  it('should fail without createAppFunction$ configuration', () => {
+  it('should fail without createAppFunction config property', () => {
     // Fail => return string; success => return null
-    const aspect = createRouteAspect();
-    aspect.config.navigationPattern$ = {};
+    const aspect = createRouteAspect({ navigationPattern: {} });
 
     expect(aspect.genesis()).not.toBeNull();
   });
 
-  it('should fail with wrong createAppFunction$ configuration (not a function)', () => {
+  it('should fail with wrong createAppFunction config property (not a function)', () => {
     // Fail => return string; success => return null
-    const aspect = createRouteAspect();
-    aspect.config.navigationPattern$ = {};
-    aspect.config.createAppFunction$ = {};
+    const aspect = createRouteAspect({
+      navigationPattern: {},
+      createAppFunction: {},
+    });
 
     expect(aspect.genesis()).not.toBeNull();
   });
 
   it('should success with configuration', () => {
     // Fail => return string; success => return null
-    const aspect = createRouteAspect();
-    aspect.config.navigationPattern$ = {};
-    aspect.config.createAppFunction$ = createAppContainer;
+    const aspect = createRouteAspect({
+      navigationPattern: {},
+      createAppFunction: createAppContainer,
+    });
 
     expect(aspect.genesis()).toBe(null);
   });
@@ -188,7 +193,7 @@ describe('initialRootAppElm', () => {
     expect(() => aspect.initialRootAppElm({}, 'dummy')).toThrow();
   });
 
-  it('should throw an error because config.navigationPattern$ in not defined', () => {
+  it('should throw an error because config.navigationPattern in not defined', () => {
     const aspect = createRouteAspect();
     aspect.genesis();
     aspect.assembleFeatureContent({}, [
@@ -197,9 +202,8 @@ describe('initialRootAppElm', () => {
     expect(() => aspect.initialRootAppElm({}, undefined)).toThrow();
   });
 
-  it('should throw an error because navigationPattern$ do not define a navigator', () => {
-    const aspect = createRouteAspect();
-    aspect.config.navigationPattern$ = {};
+  it('should throw an error because navigationPattern do not define a navigator', () => {
+    const aspect = createRouteAspect({ navigationPattern: {} });
     aspect.genesis();
     aspect.assembleFeatureContent({}, [
       { route: { routes: { myroute: { screen: Test } } } },
@@ -209,39 +213,42 @@ describe('initialRootAppElm', () => {
     );
   });
 
-  it('should throw an error because there is no routes in the navigationPattern$', () => {
-    const aspect = createRouteAspect();
-    aspect.config.navigationPattern$ = { navigator: createSwitchNavigator };
+  it('should throw an error because there is no routes in the navigationPattern', () => {
+    const aspect = createRouteAspect({
+      navigationPattern: { navigator: createSwitchNavigator },
+    });
     aspect.genesis();
     aspect.assembleFeatureContent({}, [
       { route: { routes: { myroute: { screen: Test } } } },
     ]);
     expect(() => aspect.initialRootAppElm({}, undefined)).toThrow(
-      'feature-react-navigation::buildRoutes : no routes detected, please check your navigationPattern$ configuration and exposed routes from features, actual config value : {}'
+      'feature-react-navigation::buildRoutes : no routes detected, please check your navigationPattern config property and exposed routes from features, actual config value : {}'
     );
   });
 
-  it('should throw an error because routes in the navigationPattern$ must be Array in order to be expanded', () => {
-    const aspect = createRouteAspect();
-    aspect.config.navigationPattern$ = {
-      navigator: createSwitchNavigator,
-      routes: 'home',
-    };
+  it('should throw an error because routes in the navigationPattern must be Array in order to be expanded', () => {
+    const aspect = createRouteAspect({
+      navigationPattern: {
+        navigator: createSwitchNavigator,
+        routes: 'home',
+      },
+    });
     aspect.genesis();
     aspect.assembleFeatureContent({}, [
       { route: { routes: { myroute: { screen: Test } } } },
     ]);
     expect(() => aspect.initialRootAppElm({}, undefined)).toThrow(
-      'feature-react-navigation::buildRoutes : no routes detected, please check your navigationPattern$ configuration and exposed routes from features, actual config value : {"routes":"home"}'
+      'feature-react-navigation::buildRoutes : no routes detected, please check your navigationPattern config property and exposed routes from features, actual config value : {"routes":"home"}'
     );
   });
 
-  it('should throw an error because there is no matching routes in the navigationPattern$', () => {
-    const aspect = createRouteAspect();
-    aspect.config.navigationPattern$ = {
-      navigator: createSwitchNavigator,
-      routes: [],
-    };
+  it('should throw an error because there is no matching routes in the navigationPattern', () => {
+    const aspect = createRouteAspect({
+      navigationPattern: {
+        navigator: createSwitchNavigator,
+        routes: [],
+      },
+    });
     aspect.genesis();
     aspect.assembleFeatureContent({}, [
       { route: { routes: { myroute: { screen: Test } } } },
@@ -251,12 +258,13 @@ describe('initialRootAppElm', () => {
     );
   });
 
-  it('should throw an error because there is no matching route for home in the navigationPattern$', () => {
-    const aspect = createRouteAspect();
-    aspect.config.navigationPattern$ = {
-      navigator: createSwitchNavigator,
-      routes: ['home'],
-    };
+  it('should throw an error because there is no matching route for home in the navigationPattern', () => {
+    const aspect = createRouteAspect({
+      navigationPattern: {
+        navigator: createSwitchNavigator,
+        routes: ['home'],
+      },
+    });
     aspect.genesis();
     aspect.assembleFeatureContent({}, [
       { route: { routes: { myroute: { screen: Test } } } },
@@ -266,12 +274,13 @@ describe('initialRootAppElm', () => {
     );
   });
 
-  it('should throw an error because there is no route in app-home feature in the navigationPattern$', () => {
-    const aspect = createRouteAspect();
-    aspect.config.navigationPattern$ = {
-      navigator: createSwitchNavigator,
-      featureRoutes: ['app-home'],
-    };
+  it('should throw an error because there is no route in app-home feature in the navigationPattern', () => {
+    const aspect = createRouteAspect({
+      navigationPattern: {
+        navigator: createSwitchNavigator,
+        featureRoutes: ['app-home'],
+      },
+    });
     aspect.genesis();
     aspect.assembleFeatureContent({}, [
       { route: { routes: { myroute: { screen: Test } } } },
@@ -386,10 +395,10 @@ describe('complex working sample', () => {
   });
 
   it('should match the snapshot', () => {
-    const aspect = createRouteAspect();
-
-    aspect.config.navigationPattern$ = config;
-    aspect.config.createAppFunction$ = createAppContainer;
+    const aspect = createRouteAspect({
+      navigationPattern: config,
+      createAppFunction: createAppContainer,
+    });
 
     aspect.genesis();
     aspect.assembleFeatureContent({}, features);
