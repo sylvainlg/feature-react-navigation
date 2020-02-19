@@ -78,7 +78,7 @@
     "cross-env": "^7.0.0",
     "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.17.0",
-    "feature-u": "^2.1.1",
+    "feature-u": "^3.0.0",
     "jest": "^25.1.0",
     "react": "^16.9.0",
     "rimraf": "^3.0.0",
