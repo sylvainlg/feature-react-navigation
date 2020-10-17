@@ -1,6 +1,9 @@
 language: node_js
 node_js:
-  - '10'
   - node # current node version (may be duplicate, but that's OK)
-script:
-  - npm run prepublish # lint, clean, build (bundles), test (bundles)
+jobs:
+  include:
+    - stage: install
+      script: yarn
+    - stage: deploy
+      script: npx semantic-release
