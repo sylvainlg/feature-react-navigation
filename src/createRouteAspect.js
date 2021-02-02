@@ -154,5 +154,7 @@ function initialRootAppElm(fassets, curRootAppElm) {
     `initialRootAppElm() introducing <AppContainer> component into rootAppElm`
   );
 
+  const { Navigator } = this.config;
+
   return <Navigator routes={this.routes} />;
 }
