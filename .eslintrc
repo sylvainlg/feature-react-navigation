@@ -9,9 +9,7 @@
   "plugins": ["react"],
   "parserOptions": {
     "sourceType": "module",
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true
-    }
+    "ecmaVersion": 2018
   },
   "globals": {
     "before": true, // before() is part of our unit test framework
