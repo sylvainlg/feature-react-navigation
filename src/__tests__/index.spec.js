@@ -1,10 +1,8 @@
 import createRouteAspect from '../createRouteAspect';
 import React from 'react';
-import { createSwitchNavigator } from '@react-navigation/core';
+// import { NavigatorContainer } from '@react-navigation/native';
+// import { createStackNavigator } from '@react-navigation/stack';
 
-function createAppContainer() {
-  return class AppContainer extends React.Component {};
-}
 class Test extends React.Component {}
 
 describe('createRouteAspect', () => {
@@ -184,33 +182,23 @@ describe('initialRootAppElm', () => {
     expect(() => aspect.initialRootAppElm({}, 'dummy')).toThrow();
   });
 });
-
+/* 
 describe('complex working sample', () => {
-  const config = {
-    navigator: createSwitchNavigator,
-    routes: {
-      startup: {
-        navigator: createSwitchNavigator,
-        navigationOptions: {
-          initialRouteName: 'app.START',
-        },
-        routes: ['app.START'],
-      },
-      unauth: {
-        navigator: createSwitchNavigator,
-        featureRoutes: ['app-login', 'app-subscription'],
-      },
-      auth: {
-        navigator: createSwitchNavigator,
-        routes: {
-          realytricky: {
-            navigator: createSwitchNavigator,
-            routes: ['home'],
-          },
-        },
-        featureRoutes: ['app-home', 'app-profil', 'app-offers'],
-      },
-    },
+  const Stack = createStackNavigator();
+  const Navigator = ({ routes }) => {
+    return (
+      <NavigatorContainer>
+        <Stack.Navigator>
+          {routes.map((route) => (
+            <Stack.Screen
+              key={route.screen.name}
+              name={route.screen.name}
+              component={route.screen}
+            />
+          ))}
+        </Stack.Navigator>
+      </NavigatorContainer>
+    );
   };
 
   const features = [
@@ -258,13 +246,11 @@ describe('complex working sample', () => {
   ];
 
   it('should match the snapshot', () => {
-    const aspect = createRouteAspect({
-      navigationPattern: config,
-      createAppFunction: createAppContainer,
-    });
+    const aspect = createRouteAspect({ Navigator });
 
     aspect.genesis();
     aspect.assembleFeatureContent({}, features);
     expect(aspect.initialRootAppElm({}, undefined)).toMatchSnapshot();
   });
 });
+ */
