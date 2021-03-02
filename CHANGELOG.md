@@ -1,3 +1,15 @@
+# [1.0.0](https://github.com/sylvainlg/feature-react-navigation/compare/v0.2.0...v1.0.0) (2021-03-02)
+
+
+### Features
+
+* Bump react-navigation to v5 with code adjustments ([#238](https://github.com/sylvainlg/feature-react-navigation/issues/238)) ([76ab684](https://github.com/sylvainlg/feature-react-navigation/commit/76ab68482280c02bc5f22e30842435c515941c4d))
+
+
+### BREAKING CHANGES
+
+* This commit provide react-navigation v5 support and drop v3/v4 compatibility
+
 # [0.2.0](https://github.com/sylvainlg/feature-react-navigation/compare/v0.1.1...v0.2.0) (2020-10-17)
 
 
