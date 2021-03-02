@@ -1,8 +1,5 @@
 = feature-react-navigation - _Feature based navigation using react-navigation_
 
-
-IMPORTANT: The v0.1.1 is only compatible with react-navigation v4
-
 *feature-react-navigation* is a https://feature-u.js.org/[feature-u] module which provide a routing aspect into your features using https://reactnavigation.org/[react-navigation].
 
 The module aim to build a single navigation tree with routes provided by each feature registred in your feature-u instance. Your features don't have the knowledge off the final tree, they only have to expose their routes throught the `route` aspect.
@@ -33,10 +30,9 @@ $ yarn add @react-navigation/web
 
 Within your mainline, register the feature-react-navigation `routeAspect` to feature-u's https://feature-u.js.org/cur/api.html#launchApp[launchApp()] method.
 
-*Please note* that routeAspect has 2 required named parameters (see below for details) :
+*Please note* that routeAspect has 1 required named parameter (see below for details) :
 
-- <<createAppFunction configuration,`createAppFunction`>>
-- <<navigationPattern configuration,`navigationPattern`>>
+- <<Navigator configuration,`Navigator`>>
 
 ==== App.js
 
@@ -49,8 +45,7 @@ import features               from './feature';
 
 // configure Aspects (as needed)
 const routeAspect = createRouteAspect({
-  createAppFunction: createAppContainer, // For react-native application
-  navigationPattern: {...}
+  Navigator
 });
 
 export default launchApp({
@@ -68,31 +63,11 @@ export default launchApp({
 });
 ----
 
-==== createAppFunction configuration
 
-Since v4, `react-navigation` is available on both react-native and react (web) platforms. The bootstrap for each platform differ a bit :
 
-- react-native : https://reactnavigation.org/docs/en/hello-react-navigation.html
-- react web : https://reactnavigation.org/docs/en/web-support.html
+==== Navigator object configuration
 
-You can choose the method you like to create your application by passing the initilization method as a named parameter `createAppFunction`.
-
-[source,javascript]
-----
-// For react-native application
-import { createAppContainer } from '@react-navigation/native';
-createRouteAspect({
-  createAppFunction: createAppContainer,
-  ...
-})
-
-// For react web application
-import { createBrowserApp } from '@react-navigation/web';
-createRouteAspect({
-  createAppFunction: createBrowserApp,
-  ...
-})
-----
+This is the classic 
 
 With this configuration, the module stay a pure `react` module. Any adherence with `react-native` is no longer required.
 
@@ -109,35 +84,15 @@ Beside, features don't have to know how the navigation is organize in the final 
 
 [source,javascript]
 ----
-import createAnimatedSwitchNavigator from 'react-navigation-animated-switch';
-import { createStackNavigator } from 'react-navigation-stack';
-
-const navigationPattern = {
-  navigator: createAnimatedSwitchNavigator,
-  routes: {
-    startup: {
-      navigator: createStackNavigator,
-      navigationOptions: {
-        initialRouteName: 'app.START',
-      },
-      routes: ['app.START'],
-    },
-    unauth: {
-      navigator: createStackNavigator,
-      navigationOptions: {
-        initialRouteName: 'app-login.LOGIN',
-      },
-      featureRoutes: ['app-login', 'app-subscription'],
-    },
-    auth: {
-      navigator: createStackNavigator,
-      navigationOptions: {
-        initialRouteName: 'app-home.HOME',
-      },
-      featureRoutes: ['app-home', 'app-profil', 'app-offers'],
-    },
-  },
-};
+const Navigator = ({ routes }) => {
+  return (
+    <NavigatorContainer>
+      <Stack.Navigator>
+        {routes.map(route => <Stack.Screen name={route.screen.name} component={route.screen} />)}
+      </Stack.Navigator>
+    </NavigatorContainer>
+  )
+}
 ----
 
 ### 2 - Promote routes
